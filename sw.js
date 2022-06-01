@@ -2,11 +2,11 @@
 
 // Our current cache version and its contents.
 var CACHE = {
-  version: "site-version-number",
+  version: "1",
   resources: [
     "/",
     "/index.html", // caches index.html
-    "/assets/", // caches all the contents inside the /css folder
+    "/assets/", // caches all the contents inside the /assets folder
   ],
 };
 
