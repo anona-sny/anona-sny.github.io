@@ -1,72 +1,27 @@
-"use strict";
-
-// Our current cache version and its contents.
-var CACHE = {
-  version: "1",
-  resources: [
-    "/",
-    "/index.html", // caches index.html
-    "/assets/", // caches all the contents inside the /assets folder
-  ],
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open("v1");
+  await cache.addAll(resources);
 };
 
-// Install service worker, adding all our cache entries
-this.addEventListener("install", function (event) {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE.version).then(function (cache) {
-      return cache.addAll(CACHE.resources);
-    })
-  );
-});
-
-// Handle a fetch request. If not fetched from cache, attempt to add to cache.
-this.addEventListener("fetch", function (event) {
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then(function (resp) {
-        return (
-          resp ||
-          fetch(event.request)
-            .then(function (response) {
-              return caches
-                .open(CACHE.version)
-                .then(function (cache) {
-                  cache
-                    .put(event.request, response.clone())
-                    .catch(function (error) {
-                      console.log("Could not add to cache!" + error);
-                    });
-                  return response;
-                })
-                .catch(function (error) {
-                  console.log("Could not open cache!" + error);
-                });
-            })
-            .catch(function (error) {
-              console.log("Resource not found!" + error);
-            })
-        );
-      })
-      .catch(function (error) {
-        console.log("Resource not found in the cache!" + error);
-      })
-  );
-});
-
-// Activate service worker
-this.addEventListener("activate", function (event) {
-  // Remove all caches that aren't whitelisted
-  var cacheWhitelist = [CACHE.version];
-  event.waitUntil(
-    caches.keys().then(function (keyList) {
-      return Promise.all(
-        keyList.map(function (key) {
-          if (cacheWhitelist.indexOf(key) === -1) {
-            return caches.delete(key);
-          }
-        })
-      );
-    })
+    addResourcesToCache([
+      "/",
+      "index.html",
+      "favicon.ico",
+      "main.2307bda58832ab9d.js",
+      "polyfills.8e591707cfaa9d0d.js",
+      "runtime.aaedba49815d2ab0.js",
+      "styles.127f990bf3eba71e.css",
+      "/assets/background.jpg",
+      "/assets/favicon.ico",
+      "/assets/icon-add.png",
+      "/assets/icon-calendar.png",
+      "/assets/icon-calendar.svg",
+      "/assets/icon-delete.svg",
+      "/assets/icon-edit.svg",
+      "/assets/icon-note.png",
+      "/assets/icon-note.svg",
+    ])
   );
 });
