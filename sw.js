@@ -6,6 +6,7 @@ const addResourcesToCache = async (resources) => {
   self.addEventListener("install", (event) => {
     event.waitUntil(
       addResourcesToCache([
+        "/",
         "index.html",
         "favicon.ico",
         "main.2307bda58832ab9d.js",
