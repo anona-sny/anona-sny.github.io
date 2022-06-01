@@ -21,7 +21,11 @@ self.addEventListener("install", (event) => {
       "/assets/icon-delete.svg",
       "/assets/icon-edit.svg",
       "/assets/icon-note.png",
-      "/assets/icon-note.svg",
+      "flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2",
+      "KFOlCnqEu92Fr1MmEU9fBBc4AMP6lQ.woff2",
+      "KFOlCnqEu92Fr1MmEU9fChc4AMP6lbBP.woff2",
+      "KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2",
+      "KFOmCnqEu92Fr1Mu7GxKKTU1Kvnz.woff2",
     ])
   );
 });
